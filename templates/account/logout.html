@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Sign out · Smart Crop{% endblock %}
+{% block content %}
+<section class="form-card card" style="text-align:center">
+    <div style="display:grid;place-items:center;width:72px;height:72px;margin:0 auto 22px;border-radius:22px;color:#0d744f;background:#e8f6ef;font-size:2rem">↗</div>
+    <div class="eyebrow">Until next time</div>
+    <h1 style="font-size:clamp(2rem,5vw,3rem);margin-top:8px">Sign out of Smart Crop?</h1>
+    <p class="muted">Your private scan history is safe. You can come back whenever you are ready to grow smarter.</p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notice" style="color:#08613f;background:#e8f6ef">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+        {% endif %}
+        <div class="actions" style="justify-content:center">
+            <button class="button" type="submit" style="min-width:190px">Yes, sign me out</button>
+            <a class="button secondary" href="{% url 'upload_leaf_image' %}">Keep scanning</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
