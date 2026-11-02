@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Successful</title>
-</head>
-<body>
-    <h1>Upload Success</h1>
-    <p>Image:</p>
-    {% if leaf.image %}
-        <img src="{{ leaf.image.url }}" alt="Uploaded Leaf Image" style="max-width: 300px;">
-    {% else %}
-        <p>No image available.</p>
-    {% endif %}
-
-    <p>Prediction: {{ prediction }}</p>
-    <p>Confidence: {{ confidence }}%</p>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Scan result · Smart Crop{% endblock %}
+{% block content %}
+<div class="eyebrow">Analysis complete</div>
+<h1 style="margin:8px 0 24px">Your leaf scan result</h1>
+<section class="card result">
+    {% if leaf.image %}<img src="{{ leaf.image.url }}" alt="Uploaded leaf image">{% endif %}
+    <div>
+        <div class="eyebrow">Most likely diagnosis</div>
+        <h2>{{ prediction|default:"Unable to classify this image" }}</h2>
+        {% if confidence %}<span class="confidence">{{ confidence|floatformat:2 }}% confidence</span>{% endif %}
+        <p class="muted">This is an AI-assisted screening result, not a replacement for professional agricultural advice.</p>
+        <div class="actions"><a class="button" href="{% url 'upload_leaf_image' %}">Scan another leaf</a><a class="button secondary" href="{% url 'leaf_image_list' %}">View history</a></div>
+    </div>
+</section>
+{% endblock %}

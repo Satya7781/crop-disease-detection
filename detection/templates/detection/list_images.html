@@ -1,25 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Images</title>
-</head>
-<body>
-    {% block content %}
-    <div class="container mt-4">
-        <h2>Uploaded Leaf Images</h2>
-        <div class="row">
-            {% for image in images %}
-                <div class="card mb-4 shadow-sm">
-                    <img src="{{ image.image.url }}" class="card-img-top" alt="Leaf Image">
-                    <div class="card-body">
-                        <p class="card-text">Uploaded: {{ image.date_uploaded|date:"d M Y H:i" }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endblock %}
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}My scans · Smart Crop{% endblock %}
+{% block content %}
+<div style="display:flex;justify-content:space-between;align-items:end;gap:16px">
+    <div><div class="eyebrow">Private history</div><h1 style="margin-top:8px">My leaf scans</h1></div>
+    <a class="button" href="{% url 'upload_leaf_image' %}">+ New scan</a>
+</div>
+{% if images %}
+<div class="gallery">
+    {% for image in images %}
+    <article class="card gallery-card">
+        <img src="{{ image.image.url }}" alt="Leaf scan">
+        <div class="body"><strong>{{ image.predicted_label|default:"Pending analysis" }}</strong><p class="muted" style="margin:6px 0 0">{{ image.date_uploaded|date:"d M Y · H:i" }}{% if image.confidence_score %} · {{ image.confidence_score|floatformat:1 }}%{% endif %}</p></div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<section class="card" style="padding:42px;text-align:center;margin-top:28px"><div style="font-size:3rem">🌱</div><h2>No scans yet</h2><p class="muted">Upload your first leaf image to start building your crop health history.</p><a class="button" href="{% url 'upload_leaf_image' %}">Start first scan</a></section>
+{% endif %}
+{% endblock %}

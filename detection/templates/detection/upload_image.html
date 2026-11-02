@@ -1,15 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Leaf Image</title>
-</head>
-<body>
-    <h1>Upload a leaf image for disease detection</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type ="submit">Upload Image</button>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Scan a leaf · Smart Crop{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <div class="eyebrow">Plant health, made simple</div>
+        <h1>See what your leaf is telling you.</h1>
+        <p class="muted">Upload a clear leaf photo and Smart Crop will identify possible diseases with an AI-powered image scan.</p>
+        <div class="actions">
+            <a class="button" href="#scan">Start a scan <span>→</span></a>
+            <a class="button secondary" href="{% url 'leaf_image_list' %}">View history</a>
+        </div>
+    </div>
+    <div class="hero-art card">
+        <div class="scan"><span class="eyebrow" style="color:#a7f3d0">Smart Crop AI</span><div class="scan-icon">🌿</div><div><strong>Fast visual screening</strong><br><span style="color:#d1fae5">Your results are saved to your private scan history.</span></div></div>
+    </div>
+</section>
+<section id="scan" class="card upload-card">
+    <div class="upload-grid">
+        <div>
+            <div class="eyebrow">New analysis</div>
+            <h2>Upload a leaf image</h2>
+            <p class="muted">Use a well-lit, focused image with the leaf filling most of the frame.</p>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="file-box">
+                <label for="{{ form.image.id_for_label }}">Choose an image</label>
+                {{ form.image }}
+                {% if form.image.errors %}{{ form.image.errors }}{% endif %}
+                <button class="button" type="submit" style="width:100%;margin-top:18px">Analyze leaf</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
