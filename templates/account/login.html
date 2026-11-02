@@ -1,25 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Log in - Smart Crop</title>
-</head>
-<body>
-    <main>
-        <h1>Log in to Smart Crop</h1>
-        {% if form.non_field_errors %}
-            <div role="alert">{{ form.non_field_errors }}</div>
-        {% endif %}
-        <form method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-            {% endif %}
-            <button type="submit">Log in</button>
-        </form>
-        <p><a href="{% url 'account_signup' %}">Create an account</a></p>
-    </main>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Log in · Smart Crop{% endblock %}
+{% block content %}
+<section class="form-card card">
+    <header>
+        <div class="eyebrow">Welcome back</div>
+        <h1 style="font-size:clamp(2rem,5vw,3rem);margin-top:8px">Grow smarter.</h1>
+        <p class="muted">Log in to scan leaves and revisit your crop health history.</p>
+    </header>
+    {% if form.non_field_errors %}<div class="notice">{{ form.non_field_errors }}</div>{% endif %}
+    <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}{{ field.errors }}{% endif %}
+        {% endfor %}
+        {% if redirect_field_value %}<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">{% endif %}
+        <div class="actions">
+            <button class="button" type="submit" style="width:100%">Log in</button>
+        </div>
+    </form>
+    <p class="muted" style="text-align:center;margin-top:22px">New to Smart Crop? <a href="{% url 'account_signup' %}">Create an account</a></p>
+</section>
+{% endblock %}

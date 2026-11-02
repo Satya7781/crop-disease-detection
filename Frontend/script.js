@@ -111,7 +111,7 @@ resizeCanvas();
 init();
 animate();
 
-const API_BASE_URL = window.SMART_CROP_API_URL || 'https://smart-crop-api.onrender.com';
+const API_BASE_URL = window.SMART_CROP_API_URL || 'https://crop-disease-detection-zfez.onrender.com';
 
 async function readJsonResponse(response) {
     const data = await response.json().catch(() => ({}));
