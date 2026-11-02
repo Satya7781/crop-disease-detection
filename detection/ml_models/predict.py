@@ -1,5 +1,4 @@
 import numpy as np
-import tensorflow as tf
 from PIL import Image
 from django.conf import settings
 import os
@@ -26,7 +25,9 @@ class_names = [
 def load_tflite_model():
     global interpreter, input_details, output_details
     model_path = os.path.join(settings.BASE_DIR, 'ml_model', 'plant_disease_model.tflite')
-    interpreter = tf.lite.Interpreter(model_path=model_path)
+    from tflite_runtime.interpreter import Interpreter
+
+    interpreter = Interpreter(model_path=model_path)
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()

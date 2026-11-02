@@ -32,6 +32,8 @@ ALLOWED_HOSTS = [
     for host in env("ALLOWED_HOSTS", default="127.0.0.1,localhost").split(",")
     if host.strip()
 ]
+if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
+    ALLOWED_HOSTS.append(os.environ["RENDER_EXTERNAL_HOSTNAME"])
 
 ML_MODEL_PATH = BASE_DIR / "ml_model" / "plant_disease_model.tflite"
 

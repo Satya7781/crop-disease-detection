@@ -123,6 +123,10 @@ have ephemeral storage, so uploaded images can be lost after a redeploy.
 Use a Render Persistent Disk or integrate Supabase Storage before treating
 uploaded images as permanent production data.
 
+The production runtime uses `tflite-runtime` instead of the full TensorFlow
+package to reduce Render memory usage. Install TensorFlow separately only
+when training or converting a model locally.
+
 Deploy the backend using:
 
 ```bash
