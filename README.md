@@ -102,6 +102,23 @@ The repository includes `render.yaml` as a Render service blueprint. Replace
 the placeholder frontend API URL in `Frontend/script.js` with the actual
 Render service URL after creating the service.
 
+### Render checklist
+
+1. Push the repository to GitHub and create a Render **Blueprint** from it.
+2. Set `DATABASE_URL` to a Supabase, Railway, or Render PostgreSQL URL.
+3. Set `ALLOWED_HOSTS` to the Render hostname, without `https://`.
+4. Set `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS` to the deployed
+   frontend origin, without a trailing slash.
+5. Confirm the service health check returns `{"status": "ok"}` at `/health/`.
+6. Create an administrator from the Render Shell with
+   `python manage.py createsuperuser`.
+7. Test registration, login, and prediction before sharing the application.
+
+The current upload backend uses local `media/` storage. Render web services
+have ephemeral storage, so uploaded images can be lost after a redeploy.
+Use a Render Persistent Disk or integrate Supabase Storage before treating
+uploaded images as permanent production data.
+
 Deploy the backend using:
 
 ```bash
