@@ -70,6 +70,7 @@ REST_FRAMEWORK = {
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'    #Redirect URL after login
 LOGOUT_REDIRECT_URL = '/'   #Redirect URL after logout
+LOGIN_URL = '/accounts/login/'
 
 #Optional settings to match normal login
 ACCOUNT_USERNAME_REQUIRED = True
@@ -115,7 +116,7 @@ ROOT_URLCONF = 'smart_crop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
