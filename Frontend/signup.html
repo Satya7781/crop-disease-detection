@@ -1,37 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Smart Crop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#123d2e">
+    <title>Create account · Smart Crop</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 mt-8">
-        <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Create an Account</h2>
-        <form id="signupForm" novalidate>
-            <div class="mb-4">
-                <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
-                <input type="text" id="username" name="username" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-300" required>
-                <p class="text-red-500 text-xs mt-1 hidden" id="usernameError">Username is required (min 3 characters).</p>
+<body>
+    <main class="page">
+        <section class="app-card">
+            <aside class="brand-panel">
+                <div class="brand-logo"><span class="logo-mark">✦</span> SMART CROP</div>
+                <div class="brand-copy">
+                    <div class="eyebrow" style="color:#a7e8c5">Your digital field journal</div>
+                    <h1>Keep every scan growing.</h1>
+                    <p>Create your free account to save results and follow your crop health over time.</p>
+                </div>
+                <ul class="feature-list" aria-label="Account benefits">
+                    <li>Save your scan history</li>
+                    <li>Fast, friendly results</li>
+                    <li>Your data stays private</li>
+                </ul>
+            </aside>
+            <div class="form-panel">
+                <div class="eyebrow">Start growing smarter</div>
+                <h2>Create your account.</h2>
+                <p class="intro">It only takes a minute. Use an email you can access for account recovery.</p>
+                <form id="signupForm" novalidate>
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" autocomplete="username" placeholder="Choose a username" required>
+                        <span class="field-error" id="usernameError"></span>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+                        <span class="field-error" id="emailError"></span>
+                    </div>
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" autocomplete="new-password" placeholder="At least 6 characters" required>
+                        <span class="field-error" id="passwordError"></span>
+                    </div>
+                    <button class="button" type="submit">Create account</button>
+                    <p class="status" id="signupStatus" role="status" aria-live="polite"></p>
+                </form>
+                <p class="form-footer">Already have an account? <a href="index.html">Log in</a></p>
             </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-300" required>
-                <p class="text-red-500 text-xs mt-1 hidden" id="emailError">Please enter a valid email address.</p>
-            </div>
-            <div class="mb-6">
-                <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition duration-300" required>
-                <p class="text-red-500 text-xs mt-1 hidden" id="passwordError">Password must be at least 6 characters.</p>
-            </div>
-            <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold py-3 px-4 rounded-lg hover:from-green-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg transition duration-300">Sign Up</button>
-        </form>
-        <div class="mt-6 text-center text-sm">
-            <p class="text-gray-600">Already have an account? <a href="index.html" class="font-medium text-green-600 hover:text-green-500 transition duration-300">Log in</a></p>
-        </div>
-    </div>
+        </section>
+    </main>
     <script src="script.js" defer></script>
 </body>
 </html>
