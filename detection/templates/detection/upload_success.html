@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Successful</title>
+</head>
+<body>
+    <h1>Upload Success</h1>
+    <p>Image:</p>
+    {% if leaf.image %}
+        <img src="{{ leaf.image.url }}" alt="Uploaded Leaf Image" style="max-width: 300px;">
+    {% else %}
+        <p>No image available.</p>
+    {% endif %}
+
+    <p>Prediction: {{ prediction }}</p>
+    <p>Confidence: {{ confidence }}%</p>
+</body>
+</html>

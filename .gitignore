@@ -1,0 +1,28 @@
+# Python
+*.pyc
+__pycache__/
+
+# Virtual Environment
+smart_crop_env/
+smart_crop_newversion_env/
+
+# Django DB
+db.sqlite3
+
+# Logs
+*.log
+*.coverage
+.coverage
+
+# Media files
+/media/
+smart_crop/settings_local.py
+
+# Local training data is not required by the deployed application
+ml_model_training/dataset/
+
+#adding .env to gitignore
+.env
+
+
+*.h5
