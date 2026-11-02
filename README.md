@@ -114,6 +114,10 @@ Render service URL after creating the service.
    `python manage.py createsuperuser`.
 7. Test registration, login, and prediction before sharing the application.
 
+If the Render service was created manually, set its Start Command to
+`gunicorn smart_crop.wsgi:application --bind 0.0.0.0:$PORT`. Do not use
+`gunicorn app:app`; this is a Django project and has no `app` module.
+
 The current upload backend uses local `media/` storage. Render web services
 have ephemeral storage, so uploaded images can be lost after a redeploy.
 Use a Render Persistent Disk or integrate Supabase Storage before treating
