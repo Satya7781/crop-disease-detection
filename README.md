@@ -126,6 +126,11 @@ have ephemeral storage, so uploaded images can be lost after a redeploy.
 Use a Render Persistent Disk or integrate Supabase Storage before treating
 uploaded images as permanent production data.
 
+The signup page intentionally rejects passwords that resemble the username,
+are too short, common, or entirely numeric. After a failed signup Django
+clears password fields for security; enter a new password that is at least
+8 characters and unrelated to the username.
+
 The production runtime uses `tflite-runtime` instead of the full TensorFlow
 package to reduce Render memory usage. Install TensorFlow separately only
 when training or converting a model locally.

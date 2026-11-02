@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account - Smart Crop</title>
+    <style>
+        :root { color-scheme: light; font-family: system-ui, sans-serif; }
+        body { margin: 0; background: #f3f4f6; color: #1f2937; }
+        main { max-width: 32rem; margin: 3rem auto; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 10px 30px rgb(0 0 0 / 10%); }
+        h1 { margin-top: 0; color: #047857; }
+        label { display: block; margin: 1rem 0 .35rem; font-weight: 600; }
+        input { box-sizing: border-box; width: 100%; padding: .7rem; border: 1px solid #d1d5db; border-radius: .5rem; }
+        input:focus { outline: 2px solid #34d399; border-color: transparent; }
+        button { width: 100%; margin-top: 1.25rem; padding: .75rem; border: 0; border-radius: .5rem; background: #059669; color: white; font-weight: 700; cursor: pointer; }
+        button:hover { background: #047857; }
+        .errorlist { margin: .35rem 0; padding-left: 1.2rem; color: #b91c1c; }
+        .helptext { display: block; margin-top: .35rem; color: #6b7280; font-size: .9rem; }
+        .notice { padding: .75rem; border-radius: .5rem; background: #fef2f2; color: #991b1b; }
+        a { color: #047857; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Create your Smart Crop account</h1>
+        <p>Already have an account? <a href="{% url 'account_login' %}">Log in</a>.</p>
+
+        {% if form.non_field_errors %}
+            <div class="notice">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <form method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}{{ field.errors }}{% endif %}
+                {% if field.help_text %}<span class="helptext">{{ field.help_text|safe }}</span>{% endif %}
+            {% endfor %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+            {% endif %}
+            <button type="submit">Sign up</button>
+        </form>
+    </main>
+</body>
+</html>
